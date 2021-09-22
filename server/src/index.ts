@@ -7,6 +7,7 @@ import { ApolloServerPluginLandingPageGraphQLPlayground } from 'apollo-server-co
 import { PostsResolver } from './resolvers/post'
 import { MikroORM } from '@mikro-orm/core'
 import microConfig from './mikro-orm.config'
+import { UserResolver } from './resolvers/user'
 
 const port = 4000
 
@@ -20,7 +21,7 @@ const main = async () => {
 
   const apolloServer = new ApolloServer({
     schema: await buildSchema({
-      resolvers: [HelloResolver, PostsResolver],
+      resolvers: [HelloResolver, PostsResolver, UserResolver],
       validate: false,
     }),
     // this shows the playground instead of the new sandbox

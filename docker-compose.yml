@@ -20,6 +20,7 @@ services:
       target: base
     volumes:
       - ./server/src:/home/node/app/src
+      - /home/node/app/node_modules/
       - ./server/nodemon.json:/home/node/app/nodemon.json
     container_name: ts-node-docker
     expose:

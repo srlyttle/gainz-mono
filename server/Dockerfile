@@ -4,7 +4,8 @@ WORKDIR /home/node/app
 
 COPY package.json ./
 
-RUN npm i
+RUN npm install && \
+  npm rebuild argon2 --build-from-source 
 
 COPY . .
 

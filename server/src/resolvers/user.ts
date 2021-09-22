@@ -1,6 +1,6 @@
 import { User } from '../entities/User'
 import { MyContext } from 'src/types'
-import { Arg, Ctx, Field, InputType, Mutation, ObjectType, Resolver } from 'type-graphql'
+import { Arg, Ctx, Field, InputType, Mutation, ObjectType, Query, Resolver } from 'type-graphql'
 import argon2 from 'argon2'
 
 @InputType()
@@ -28,12 +28,25 @@ class UserResponse {
 }
 @Resolver()
 export class UserResolver {
+  @Query(() => User, { nullable: true })
+  // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
+  async me(
+    @Ctx()
+    { req, em }: MyContext,
+  ) {
+    if (!req?.session?.userId) {
+      return null
+    }
+
+    return await em.findOne(User, { id: req.session.userId })
+  }
+
   @Mutation(() => UserResponse)
   // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
   async register(
     @Arg('options') options: UsernamePasswordInput,
     @Ctx()
-    { em }: MyContext,
+    { em, req }: MyContext,
   ): Promise<UserResponse> {
     if (options.username.length <= 2) {
       return {
@@ -53,6 +66,10 @@ export class UserResolver {
     const user = await em.create(User, { username: options.username, password: hashedPassword })
 
     em.persistAndFlush(user)
+
+    // expression-session - sets the cookie
+    req.session.userId = user.id
+
     return { user }
   }
 
@@ -61,7 +78,7 @@ export class UserResolver {
   async login(
     @Arg('options') options: UsernamePasswordInput,
     @Ctx()
-    { em }: MyContext,
+    { em, req }: MyContext,
   ): Promise<UserResponse> {
     const user = await em.findOne(User, { username: options.username })
     if (!user) {
@@ -86,6 +103,9 @@ export class UserResolver {
         ],
       }
     }
+
+    // expression-session - sets the cookie
+    req.session.userId = user.id
 
     return { user }
   }

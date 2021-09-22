@@ -18,6 +18,10 @@ services:
       context: ./server
       dockerfile: Dockerfile
       target: base
+    links:
+      - redis
+    environment:
+      - REDIS_URL=redis://cache
     volumes:
       - ./server/src:/home/node/app/src
       - /home/node/app/node_modules/
@@ -30,6 +34,7 @@ services:
     command: npm run dev
     depends_on:
       - db
+      - redis-server
 
   db:
     image: postgres
@@ -41,3 +46,9 @@ services:
       - ./db/data/postgres:/var/lib/postgresql/data
     ports:
       - 5432:5432
+
+  redis-server:
+    image: redis
+    container_name: cache
+    expose:
+      - 6379

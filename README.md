@@ -1,2 +1,3 @@
-# react-nodejs-typescript-example
-Example project for the react and node with typescript
+# Gainz Mono
+
+WIP - Monorepo for React with Next.js and Appollo, using a Node Graph QL backend

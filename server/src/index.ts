@@ -12,6 +12,7 @@ import redis from 'redis'
 import session from 'express-session'
 import connectRedis from 'connect-redis'
 import { MyContext } from './types'
+import cors from 'cors'
 
 const port = 4000
 
@@ -23,6 +24,12 @@ const main = async () => {
     port: 6379,
   })
 
+  app.use(
+    cors({
+      origin: 'http://localhost:3001',
+      credentials: true,
+    }),
+  )
   // TODO - possibly replace with jwt
   app.use(
     session({
@@ -57,7 +64,12 @@ const main = async () => {
     plugins: [ApolloServerPluginLandingPageGraphQLPlayground({})],
     context: ({ req, res }): MyContext => ({ em: orm.em, req, res }),
   })
+
   await apolloServer.start()
+  apolloServer.applyMiddleware({
+    app,
+    cors: false,
+  })
   apolloServer.applyMiddleware({ app })
 }
 main()

@@ -3,7 +3,7 @@ import { ChakraProvider, ColorModeProvider } from '@chakra-ui/react'
 import React from 'react'
 import client from '../apollo/client'
 
-import theme from '../theme'
+import theme from '../theme/theme'
 
 function MyApp({ Component, pageProps }) {
     return (

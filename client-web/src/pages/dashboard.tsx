@@ -50,17 +50,13 @@ import { BsArrowRight } from 'react-icons/bs'
 import { IoCheckmarkDoneCircleSharp } from 'react-icons/io5'
 import { dashboardTableData, timelineData } from '../variables/general'
 import { DashboardLayout } from '../components/Layout/DashboardLayout'
-export default function Index() {
+export default function Dashboard() {
     const value = '$100.000'
     // Chakra Color Mode
     const { colorMode, toggleColorMode } = useColorMode()
     const iconTeal = useColorModeValue('teal.300', 'teal.300')
     const iconBoxInside = useColorModeValue('white', 'white')
     const textColor = useColorModeValue('gray.700', 'white')
-    const bgButton = useColorModeValue(
-        'linear-gradient(81.62deg, #313860 2.25%, #151928 79.87%)',
-        'gray.800',
-    )
     const [series, setSeries] = useState([
         {
             type: 'area',
@@ -77,7 +73,7 @@ export default function Index() {
 
     return (
         <Flex flexDirection="column" pt={{ base: '120px', md: '75px' }}>
-            <SimpleGrid pb={4} columns={{ sm: 1, md: 2, xl: 4 }} spacing="24px">
+            <SimpleGrid columns={{ sm: 1, md: 2, xl: 4 }} spacing="24px">
                 <Card minH="83px">
                     <CardBody>
                         <Flex
@@ -93,15 +89,11 @@ export default function Index() {
                                     fontWeight="bold"
                                     pb=".1rem"
                                 >
-                                    Weekly workouts
+                                    Today's Money
                                 </StatLabel>
                                 <Flex>
-                                    <StatNumber
-                                        fontSize="lg"
-                                        color={textColor}
-                                        pr="1rem"
-                                    >
-                                        3
+                                    <StatNumber fontSize="lg" color={textColor}>
+                                        $53,000
                                     </StatNumber>
                                     <StatHelpText
                                         alignSelf="flex-end"
@@ -146,15 +138,11 @@ export default function Index() {
                                     fontWeight="bold"
                                     pb=".1rem"
                                 >
-                                    Weekly Clients
+                                    Today's Users
                                 </StatLabel>
                                 <Flex>
-                                    <StatNumber
-                                        pr="1rem"
-                                        fontSize="lg"
-                                        color={textColor}
-                                    >
-                                        1
+                                    <StatNumber fontSize="lg" color={textColor}>
+                                        2,300
                                     </StatNumber>
                                     <StatHelpText
                                         alignSelf="flex-end"
@@ -165,7 +153,7 @@ export default function Index() {
                                         ps="3px"
                                         fontSize="md"
                                     >
-                                        0%
+                                        +5%
                                     </StatHelpText>
                                 </Flex>
                             </Stat>
@@ -199,26 +187,22 @@ export default function Index() {
                                     fontWeight="bold"
                                     pb=".1rem"
                                 >
-                                    Joiners
+                                    New Clients
                                 </StatLabel>
                                 <Flex>
-                                    <StatNumber
-                                        pr="1rem"
-                                        fontSize="lg"
-                                        color={textColor}
-                                    >
-                                        0
+                                    <StatNumber fontSize="lg" color={textColor}>
+                                        +3,020
                                     </StatNumber>
                                     <StatHelpText
                                         alignSelf="flex-end"
                                         justifySelf="flex-end"
                                         m="0px"
-                                        color="green.400"
+                                        color="red.500"
                                         fontWeight="bold"
                                         ps="3px"
                                         fontSize="md"
                                     >
-                                        0%
+                                        -14%
                                     </StatHelpText>
                                 </Flex>
                             </Stat>
@@ -253,27 +237,26 @@ export default function Index() {
                                     fontWeight="bold"
                                     pb=".1rem"
                                 >
-                                    Total Workouts
+                                    Total Sales
                                 </StatLabel>
                                 <Flex>
                                     <StatNumber
                                         fontSize="lg"
                                         color={textColor}
                                         fontWeight="bold"
-                                        pr="1rem"
                                     >
-                                        3
+                                        $173,000
                                     </StatNumber>
                                     <StatHelpText
                                         alignSelf="flex-end"
                                         justifySelf="flex-end"
                                         m="0px"
-                                        color="red.500"
+                                        color="green.400"
                                         fontWeight="bold"
                                         ps="3px"
                                         fontSize="md"
                                     >
-                                        -14%
+                                        +8%
                                     </StatHelpText>
                                 </Flex>
                             </Stat>
@@ -293,7 +276,207 @@ export default function Index() {
                     </CardBody>
                 </Card>
             </SimpleGrid>
-            <SimpleGrid pb={4} columns={{ sm: 1, md: 2, xl: 2 }} spacing="24px">
+
+            <Grid
+                templateColumns={{ sm: '1fr', lg: '1.3fr 1.7fr' }}
+                templateRows={{ sm: 'repeat(2, 1fr)', lg: '1fr' }}
+                gap="24px"
+                mb={{ lg: '26px' }}
+            >
+                <Card p="16px">
+                    <CardBody>
+                        <Flex direction="column" w="100%">
+                            <BarChart />
+                            <Flex
+                                direction="column"
+                                mt="24px"
+                                mb="36px"
+                                alignSelf="flex-start"
+                            >
+                                <Text
+                                    fontSize="lg"
+                                    color={textColor}
+                                    fontWeight="bold"
+                                    mb="6px"
+                                >
+                                    Active Users
+                                </Text>
+                                <Text
+                                    fontSize="md"
+                                    fontWeight="medium"
+                                    color="gray.400"
+                                >
+                                    <Text
+                                        as="span"
+                                        color="green.400"
+                                        fontWeight="bold"
+                                    >
+                                        (+23%)
+                                    </Text>{' '}
+                                    than last week
+                                </Text>
+                            </Flex>
+                            <SimpleGrid gap={{ sm: '12px' }} columns={4}>
+                                <Flex direction="column">
+                                    <Flex alignItems="center">
+                                        <IconBox
+                                            as="box"
+                                            h={'30px'}
+                                            w={'30px'}
+                                            bg={iconTeal}
+                                            me="6px"
+                                        >
+                                            <WalletIcon
+                                                h={'15px'}
+                                                w={'15px'}
+                                                color={iconBoxInside}
+                                            />
+                                        </IconBox>
+                                        <Text
+                                            fontSize="sm"
+                                            color="gray.400"
+                                            fontWeight="semibold"
+                                        >
+                                            Users
+                                        </Text>
+                                    </Flex>
+                                    <Text
+                                        fontSize="lg"
+                                        color={textColor}
+                                        fontWeight="bold"
+                                        mb="6px"
+                                        my="6px"
+                                    >
+                                        32,984
+                                    </Text>
+                                    <Progress
+                                        colorScheme="teal"
+                                        borderRadius="12px"
+                                        h="5px"
+                                        value={20}
+                                    />
+                                </Flex>
+                                <Flex direction="column">
+                                    <Flex alignItems="center">
+                                        <IconBox
+                                            as="box"
+                                            h={'30px'}
+                                            w={'30px'}
+                                            bg={iconTeal}
+                                            me="6px"
+                                        >
+                                            <RocketIcon
+                                                h={'15px'}
+                                                w={'15px'}
+                                                color={iconBoxInside}
+                                            />
+                                        </IconBox>
+                                        <Text
+                                            fontSize="sm"
+                                            color="gray.400"
+                                            fontWeight="semibold"
+                                        >
+                                            Clicks
+                                        </Text>
+                                    </Flex>
+                                    <Text
+                                        fontSize="lg"
+                                        color={textColor}
+                                        fontWeight="bold"
+                                        mb="6px"
+                                        my="6px"
+                                    >
+                                        2.42m
+                                    </Text>
+                                    <Progress
+                                        colorScheme="teal"
+                                        borderRadius="12px"
+                                        h="5px"
+                                        value={90}
+                                    />
+                                </Flex>
+                                <Flex direction="column">
+                                    <Flex alignItems="center">
+                                        <IconBox
+                                            as="box"
+                                            h={'30px'}
+                                            w={'30px'}
+                                            bg={iconTeal}
+                                            me="6px"
+                                        >
+                                            <CartIcon
+                                                h={'15px'}
+                                                w={'15px'}
+                                                color={iconBoxInside}
+                                            />
+                                        </IconBox>
+                                        <Text
+                                            fontSize="sm"
+                                            color="gray.400"
+                                            fontWeight="semibold"
+                                        >
+                                            Sales
+                                        </Text>
+                                    </Flex>
+                                    <Text
+                                        fontSize="lg"
+                                        color={textColor}
+                                        fontWeight="bold"
+                                        mb="6px"
+                                        my="6px"
+                                    >
+                                        2,400$
+                                    </Text>
+                                    <Progress
+                                        colorScheme="teal"
+                                        borderRadius="12px"
+                                        h="5px"
+                                        value={30}
+                                    />
+                                </Flex>
+                                <Flex direction="column">
+                                    <Flex alignItems="center">
+                                        <IconBox
+                                            as="box"
+                                            h={'30px'}
+                                            w={'30px'}
+                                            bg={iconTeal}
+                                            me="6px"
+                                        >
+                                            <StatsIcon
+                                                h={'15px'}
+                                                w={'15px'}
+                                                color={iconBoxInside}
+                                            />
+                                        </IconBox>
+                                        <Text
+                                            fontSize="sm"
+                                            color="gray.400"
+                                            fontWeight="semibold"
+                                        >
+                                            Items
+                                        </Text>
+                                    </Flex>
+                                    <Text
+                                        fontSize="lg"
+                                        color={textColor}
+                                        fontWeight="bold"
+                                        mb="6px"
+                                        my="6px"
+                                    >
+                                        320
+                                    </Text>
+                                    <Progress
+                                        colorScheme="teal"
+                                        borderRadius="12px"
+                                        h="5px"
+                                        value={50}
+                                    />
+                                </Flex>
+                            </SimpleGrid>
+                        </Flex>
+                    </CardBody>
+                </Card>
                 <Card p="28px 10px 16px 0px" mb={{ sm: '26px', lg: '0px' }}>
                     <CardHeader mb="20px" pl="22px">
                         <Flex direction="column" alignSelf="flex-start">
@@ -303,7 +486,7 @@ export default function Index() {
                                 fontWeight="bold"
                                 mb="6px"
                             >
-                                Performance Overview
+                                Sales Overview
                             </Text>
                             <Text
                                 fontSize="md"
@@ -325,130 +508,10 @@ export default function Index() {
                         <LineChart />
                     </Box>
                 </Card>
-                <Card maxH="100%">
-                    <CardHeader p="22px 0px 35px 14px">
-                        <Flex direction="column">
-                            <Text
-                                fontSize="lg"
-                                color={textColor}
-                                fontWeight="bold"
-                                pb=".5rem"
-                            >
-                                Gainz Timeline
-                            </Text>
-                            <Text
-                                fontSize="sm"
-                                color="gray.400"
-                                fontWeight="normal"
-                            >
-                                <Text
-                                    fontWeight="bold"
-                                    as="span"
-                                    color="teal.300"
-                                >
-                                    +30%
-                                </Text>{' '}
-                                this month.
-                            </Text>
-                        </Flex>
-                    </CardHeader>
-                    <CardBody ps="20px" pe="0px" mb="31px" position="relative">
-                        <Flex direction="column">
-                            {timelineData.map((row, index, arr) => {
-                                return (
-                                    <TimelineRow
-                                        logo={row.logo}
-                                        title={row.title}
-                                        date={row.date}
-                                        color={row.color}
-                                        index={index}
-                                        arrLength={arr.length}
-                                    />
-                                )
-                            })}
-                        </Flex>
-                    </CardBody>
-                </Card>
-            </SimpleGrid>
-            <SimpleGrid columns={{ sm: 1, md: 1, xl: 1 }} spacing="24px">
-                <Card p="16px" overflowX={{ sm: 'scroll', xl: 'hidden' }}>
-                    <CardHeader p="12px 0px 28px 0px">
-                        <Flex direction="column" w="100%">
-                            <Flex
-                                justify="space-between"
-                                align="center"
-                                minHeight="60px"
-                                w="100%"
-                            >
-                                <Text
-                                    fontSize="lg"
-                                    color={textColor}
-                                    fontWeight="bold"
-                                    pb=".5rem"
-                                >
-                                    Training Splits
-                                </Text>
-                                <Button
-                                    bg={bgButton}
-                                    color="white"
-                                    fontSize="xs"
-                                    variant="no-hover"
-                                >
-                                    ADD NEW SPLIT
-                                </Button>
-                            </Flex>
-                            <Flex align="center">
-                                <Icon
-                                    as={IoCheckmarkDoneCircleSharp}
-                                    color="teal.300"
-                                    w={4}
-                                    h={4}
-                                    pe="3px"
-                                />
-                                <Text
-                                    fontSize="sm"
-                                    color="gray.400"
-                                    fontWeight="normal"
-                                >
-                                    <Text fontWeight="bold" as="span">
-                                        3
-                                    </Text>{' '}
-                                    active splits.
-                                </Text>
-                            </Flex>
-                        </Flex>
-                    </CardHeader>
-                    <Table variant="simple" color={textColor}>
-                        <Thead>
-                            <Tr my=".8rem" ps="0px">
-                                <Th ps="0px" color="gray.400">
-                                    Split Name
-                                </Th>
-
-                                <Th color="gray.400">Members</Th>
-                                <Th color="gray.400">Workouts</Th>
-                                <Th color="gray.400">Weekly Completion</Th>
-                            </Tr>
-                        </Thead>
-                        <Tbody>
-                            {dashboardTableData.map((row) => {
-                                return (
-                                    <DashboardTableRow
-                                        name={row.name}
-                                        logo={row.logo}
-                                        members={row.members}
-                                        budget={row.budget}
-                                        progression={row.progression}
-                                    />
-                                )
-                            })}
-                        </Tbody>
-                    </Table>
-                </Card>
-            </SimpleGrid>
+            </Grid>
         </Flex>
     )
 }
-Index.getLayout = function getLayout(page: ReactElement) {
+Dashboard.getLayout = function getLayout(page: ReactElement) {
     return <DashboardLayout>{page}</DashboardLayout>
 }

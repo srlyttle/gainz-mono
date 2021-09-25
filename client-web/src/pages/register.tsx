@@ -8,17 +8,19 @@ import {
 } from '@chakra-ui/react'
 import React from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
+import { LoginLayout } from '../components/Layout/LoginLayout'
 
 import { Wrapper } from '../components/Wrapper'
-import { useRegisterMutation } from '../hooks/useRegister'
+import { useRegisterMutation } from '../generated/graphql'
+// import { useRegisterMutation } from '../hooks/useRegister'
 
 interface RegisterFormInputs {
     username: string
     password: string
 }
 
-const Register: React.FC = ({}) => {
-    const registerUser = useRegisterMutation()
+const Register: React.FC = () => {
+    const [registerUser] = useRegisterMutation()
     const {
         register,
         handleSubmit,

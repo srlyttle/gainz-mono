@@ -1,0 +1,7 @@
+query splits{
+  splits{
+      id
+    name
+    workouts
+  }
+}

@@ -13,6 +13,7 @@ import session from 'express-session'
 import connectRedis from 'connect-redis'
 import { MyContext } from './types'
 import cors from 'cors'
+import { SplitResolver } from './resolvers/split'
 
 const port = 4000
 
@@ -57,7 +58,7 @@ const main = async () => {
 
   const apolloServer = new ApolloServer({
     schema: await buildSchema({
-      resolvers: [HelloResolver, PostsResolver, UserResolver],
+      resolvers: [HelloResolver, PostsResolver, UserResolver, SplitResolver],
       validate: false,
     }),
     // this shows the playground instead of the new sandbox
@@ -70,6 +71,5 @@ const main = async () => {
     app,
     cors: false,
   })
-  apolloServer.applyMiddleware({ app })
 }
 main()

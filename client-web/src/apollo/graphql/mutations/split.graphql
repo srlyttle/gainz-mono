@@ -1,0 +1,6 @@
+mutation createSplit($workouts: Float!, $name: String!){
+  createSplit(workouts:$workouts,name:$name){
+    id
+    name
+  }
+}

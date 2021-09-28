@@ -50,6 +50,7 @@ import { BsArrowRight } from 'react-icons/bs'
 import { IoCheckmarkDoneCircleSharp } from 'react-icons/io5'
 import { dashboardTableData, timelineData } from '../variables/general'
 import { DashboardLayout } from '../components/Layout/DashboardLayout'
+// import { useSplitsQuery } from '../generated/graphql'
 export default function Dashboard() {
     const value = '$100.000'
     // Chakra Color Mode

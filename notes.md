@@ -25,3 +25,17 @@ docker exec -t -i 07eee788be98 /bin/bash
 
 recreate to get latest
 docker-compose up -d --build --force-recreate
+
+workflow for new entities
+
+add entity
+add resolver
+add to server and mikro orm config
+
+bash into api container - run mikro-orm migration:create
+
+test in playground
+
+on front end, use playground queries mutations and add parameters to use in client .grapgql files
+
+run client yarn codegen - didnt work in docker so ran locally

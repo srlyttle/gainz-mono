@@ -50,6 +50,7 @@ import { BsArrowRight } from 'react-icons/bs'
 import { IoCheckmarkDoneCircleSharp } from 'react-icons/io5'
 import { dashboardTableData, timelineData } from '../variables/general'
 import { DashboardLayout } from '../components/Layout/DashboardLayout'
+import { useSplitsQuery } from '../generated/graphql'
 export default function Index() {
     const value = '$100.000'
     // Chakra Color Mode
@@ -74,7 +75,8 @@ export default function Index() {
         },
     ])
     const overlayRef = React.useRef()
-
+    const { data } = useSplitsQuery()
+    console.log('datattattatat', data?.splits)
     return (
         <Flex flexDirection="column" pt={{ base: '120px', md: '75px' }}>
             <SimpleGrid pb={4} columns={{ sm: 1, md: 2, xl: 4 }} spacing="24px">
@@ -431,14 +433,15 @@ export default function Index() {
                             </Tr>
                         </Thead>
                         <Tbody>
-                            {dashboardTableData.map((row) => {
+                            {data?.splits.map((row) => {
                                 return (
                                     <DashboardTableRow
+                                        key={row.id}
                                         name={row.name}
-                                        logo={row.logo}
-                                        members={row.members}
-                                        budget={row.budget}
-                                        progression={row.progression}
+                                        logo={null}
+                                        members={[]}
+                                        budget={null}
+                                        progression={null}
                                     />
                                 )
                             })}
